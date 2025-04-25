@@ -1,0 +1,84 @@
+class Inquilino{
+    constructor(nombre, dni){
+        this.name=nombre;
+        this.DNI=dni;
+        this.tieneDeudas=false;
+        this.deudas=[];
+    }
+    
+    agregarDeuda(Deuda){
+        this.deudas.push(Deuda);
+    }
+    
+}
+
+class Departamento{
+    constructor(numeroPuerta, Inquilino){
+        this.numero =numeroPuerta;
+        this.inquilino= Inquilino;
+    }
+}
+
+
+
+class Edificio{
+    constructor(){
+        this.departamentos=[];
+    }
+    agregarDepartamento(departamento){
+        this.departamentos.push(departamento);
+    }
+}
+
+
+
+class Deuda {
+    constructor(periodo,montoDeuda){
+        this.Periodo=periodo;
+        this.MontoDeuda=montoDeuda;
+        this.estado=false;
+  }
+  estadoPago() {
+    return this.estado? "pagado" : "pendiente";
+  }
+  pagar(montoPago){
+    if(this.MontoDeuda>0){
+        this.MontoDeuda -= montoPago;
+        if (this.MontoDeuda === montoPago) {
+            this.estado = true; 
+            console.log("Se ha pagado con éxito.");
+        } else {
+            console.log(`Se ha abonado: ${montoPago}. Queda por pagar: ${this.MontoDeuda}`);
+        }
+    }else{
+        console.log("No tiene pagos Pendientes")
+    }
+  }
+  
+  
+}
+/*let deuda1= new Deuda();
+deuda1.pagar();
+console.log(deuda1.estadoPago());*/
+let inqui1= new Inquilino("Juan","72958551");
+let dep1= new Departamento(71,inqui1);
+const Edificio_La_Rosita = new Edificio(); 
+Edificio_La_Rosita.agregarDepartamento(dep1);
+/*Edificio_La_Rosita.departamentos.forEach((dep1, i) => {
+    console.log(`Departamento ${i + 1}:`);
+    console.log(`  Número de puerta: ${dep1.numero}`);
+    console.log(`  Inquilino: ${dep1.inquilino.name}`);
+    console.log(`  DNI: ${dep1.inquilino.DNI}`);
+});*/
+
+/*let deuda1 = new Deuda("Enero", 500);
+let deuda2 = new Deuda("Febrero", 1000);
+inqui1.agregarDeuda(deuda1);
+inqui1.agregarDeuda(deuda2);
+inqui1.deudas.forEach((deuda, i) => {
+    console.log(`Deuda ${i + 1} - Periodo: ${deuda.Periodo} 
+        Monto: ${deuda.MontoDeuda}, 
+        Estado: ${deuda.estadoPago()}`);
+});
+inqui1.deudas[1].pagar(200)
+console.log(inqui1.deudas[1].estadoPago());*/
